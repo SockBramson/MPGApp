@@ -1,28 +1,15 @@
-#:kivy 1.0.9
-
 <MPGCalculator>:    
-    miles: miles_input
-    gallons: gallons_input
-    EntriesPopup:
-        title: "Enteries"
-        size_hint: .5, .5
-        content:
-        GridLayout:
-            cols: 2
-            row_default_height: "40dp"
-            row_force_default: True
-            spacing: "10dp"
-            padding: "10dp"
-            Label:
-                text: "Miles"
-            TextInput:
-                id: miles_input
-            Label:
-                text: "Gallons"
-            TextInput:
-                id: gallons_input
+    orientation: 'vertical'
+    GridLayout:
+        cols: 2
+        row_default_height: "40dp"
+        row_force_default: True
+        Label:
+            text: "Miles"
+        TextInput:
+            id: miles_input
         Button:
             size_hint_y: None
             height: "40dp"
             text: "Enter"
-            on_press: root.MPGCalculator()
+            on_press: root.MPGCalculatorApp()

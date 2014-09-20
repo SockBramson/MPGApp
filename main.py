@@ -1,5 +1,5 @@
 from kivy.app import App
-from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
 from kivy.uix.popup import Popup
 from kivy.uix.gridlayout import GridLayout
@@ -8,11 +8,13 @@ from kivy.uix.gridlayout import GridLayout
     #    gallons = 11.275
     #    print(round(miles / gallons, 2))
  
-class MPGCalculator(App):
-    def mpg():
-        miles = ObjectProperty()
-        gallons = ObjectProperty()
+class MPGCalculatorApp(App):
+    def build(self):
+        return MGPCalculatorApp()
+    #def mpg():
+     #   miles = ObjectProperty()
+      #  gallons = ObjectProperty()
       
-        print(round(miles / gallons, 2))
+       # print(round(miles / gallons, 2))
  
 MPGCalculator().run()
