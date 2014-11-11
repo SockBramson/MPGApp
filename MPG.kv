@@ -1,0 +1,56 @@
+<Calc>:
+    # These are attributes of the class Calc now
+    miles: _miles
+    gallons: _gallons
+    mpg: _mpg
+    avgmpg: _avgmpg
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        ScreenManager:
+            size_hint: 1, .9
+            id: _screen_manager
+            Screen:
+                name: 'screen1'
+                GridLayout:
+                    cols:1
+                    Label:
+                        id: _avgmpg
+                        font_size: '50dp'
+                        text: "AVG over time" #this is placeholder for average value over time. Delete it.                  
+                    TextInput:
+                        id: _miles
+                        focus: True
+                        hint_text: 'Enter mileage'
+                    TextInput:
+                        id: _gallons
+                        hint_text: 'Enter gallons'
+                    Label:
+                        id: _mpg
+                        font_size: '20dp'
+                    Button:
+                        text: 'Direct'
+                        # You can do the opertion directly
+                        on_press: _mpg.text = str(float(_miles.text) / float(_gallons.text))
+                    Button:
+                        text: 'Function'
+                        # Or you can call a method from the root class (instance of calc)
+                        on_press: root.mpgs(*args)
+            Screen:
+                name: 'screen2'
+                Label: 
+                    text: 'The second screen'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, .1
+            Button:
+                text: 'Go to Screen 1'
+                on_press: _screen_manager.current = 'screen1'
+            Button:
+                text: 'Go to Screen 2'
+                on_press: _screen_manager.current = 'screen2'
+ #   Store:
+        # Can I add the storage into this part?
