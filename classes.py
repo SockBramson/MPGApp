@@ -1,4 +1,3 @@
-# learning classes.
 import time
 import os.path
 
@@ -6,7 +5,7 @@ fame = 'values.csv'
 floc = 'C:\\Users\\marielr\\AppData\\Roaming\mpg\\'
 
 
-class derta(object):
+class calc(object):
     '''data received as a result of our mpg calcs.
 
     attributes:
@@ -19,8 +18,7 @@ class derta(object):
     def __init__(self, miles, gallons):
         self.miles = miles
         self.gallons = gallons
-        secs = str(int(time.time())) # need a string, but converted to int to remove decimals.
-        self.date = secs # .encode('utf-8')
+        self.mpgs = self.mpg()
 
     def mpg(self):
         if self.gallons >= 1 and self.miles >= 1:
@@ -29,41 +27,64 @@ class derta(object):
         else:
             raise RuntimeError("Value is empty")
 
-class sterage(object):
+class storage(object):
     ''' Where we are saving stuff. 
     Attributes:
-    location: where to save this.
-    data: what to save.
+    fname: name of file
+    flocation: where to save this.
+    payload: what to save.
+    save_file: path and filename
     '''
-    terst = derta(261.23, 11.161)
-    payload = ",".join([terst.date, terst.mpg(), str(terst.miles), str(terst.gallons)])
-
-    def __init__(self, fname, flocation):
+    
+    def __init__(self, fname, flocation, payload):
         self.fname = fname
-        self.flocation = flocation 
-
+        self.flocation = flocation
+        self.payload = payload
+        self.save_file = self.flocation + self.fname
+        
+    
     def fread(self):
-        save_file = self.flocation + self.fname
-        with open(save_file, 'rb') as f:  # 'with' opens the file and closes the file. 'a+' append and 'b' binary, just in case.
+        with open(self.save_file, 'rb') as f:  # 'with' opens the file and closes the file. 'r' to read and 'b' binary, just in case.
             data = f.read()
-        return data
+            return data
 
-    def fwrite(self, payload):
-        save_file = self.flocation + self.fname
-        with open(save_file, 'a+b') as f:  # 'with' opens the file and closes the file. 'a+' append and 'b' binary, just in case.
-            f.write(bytes(payload + '\n', 'utf-8'))
+    def fwrite(self):
+        with open(self.save_file, 'a+b') as f:  # 'with' opens the file and closes the file. 'w' to overwrite, a+ to append and 'b' binary, just in case.
+            f.write(bytes(self.payload + '\n', 'utf-8'))
+        
+    def fexists(self):
+        if os.path.isfile(self.save_file) == False:
+            default_payload = "Date,MPG,Miles,Gallons"
+            with open(self.save_file, 'wb') as f:
+                f.write(bytes(default_payload + '\n', 'utf-8'))
+        
+                
+                
 
-    def fexists(self, flocation):
-        save_file = self.flocation + self.fname
-        os.path.isfile(save_file)
+class pload(object):
+    ''' The data written to file.
+
+    Attributes:
+    date: current time of calculations
+    mpgs: result of calculations.
+    miles: Miles driven
+    Gallons: Gallons used.
+    '''
+
+    def __init__(self, miles, gallons):
+        #secs = str(int(time.time())) # need a string, but converted to int to remove decimals.
+        self.date = time.strftime("%d/%m/%Y") #secs # .encode('utf-8')
+        self.miles = str(calc(miles, gallons).miles)
+        self.gallons = str(calc(miles, gallons).gallons)
+        self.mpgs = str(calc(miles, gallons).mpgs)
+
+    def final(self):
+        payload = ",".join([self.date, self.mpgs, self.miles, self.gallons])
+        return payload
 
 
-
-#print(terst.mpg())
-#print(terst.date)
-#sterst = sterage('values.csv', 'C:\\Users\\marielr\\AppData\\Roaming\mpg\\')
-# sterst = sterage(fame, floc)
-
-# sterst.fwrite(payload)
-# print(sterst.fread())
-
+pload_input = pload(251.0, 19.121).final()
+storage_object = storage(fame, floc, pload_input)
+storage_object.fexists()
+storage_object.fwrite()
+print(storage_object.fread())
