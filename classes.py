@@ -83,7 +83,7 @@ class pload(object):
         return payload
 
 
-pload_input = pload(251.0, 19.121).final()
+pload_input = pload(212.32, 10.551).final()
 storage_object = storage(fame, floc, pload_input)
 storage_object.fexists()
 storage_object.fwrite()
