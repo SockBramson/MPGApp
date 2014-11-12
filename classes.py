@@ -1,9 +1,16 @@
 import time
 import os.path
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.floatlayout import FloatLayout
 
 fame = 'values.csv'
 floc = 'C:\\Users\\marielr\\AppData\\Roaming\mpg\\'
 
+
+class num_input(FloatLayout):
+    def __init__(self, instance):
+        pass # I don't know what I'm doing here. Try to create it by adding widgets here and then translate that to kv language. or look into pyside. QT, son.
 
 class calc(object):
     '''data received as a result of our mpg calcs.
@@ -58,9 +65,6 @@ class storage(object):
             with open(self.save_file, 'wb') as f:
                 f.write(bytes(default_payload + '\n', 'utf-8'))
         
-                
-                
-
 class pload(object):
     ''' The data written to file.
 
@@ -82,9 +86,16 @@ class pload(object):
         payload = ",".join([self.date, self.mpgs, self.miles, self.gallons])
         return payload
 
+class MPGApp(App):
+    # The app object.
+    def build(self):
+        return num_input()
 
 pload_input = pload(212.32, 10.551).final()
 storage_object = storage(fame, floc, pload_input)
 storage_object.fexists()
 storage_object.fwrite()
 print(storage_object.fread())
+
+if __name__ == '__main__':
+    MPGApp().run()

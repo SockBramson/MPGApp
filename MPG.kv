@@ -1,5 +1,5 @@
-<Calc>:
-    # These are attributes of the class Calc now
+<num_input>:
+    # These are attributes of the class num_input now.
     miles: _miles
     gallons: _gallons
     mpg: _mpg
@@ -17,7 +17,7 @@
                     Label:
                         id: _avgmpg
                         font_size: '50dp'
-                        text: "AVG over time" #this is placeholder for average value over time. Delete it.                  
+                        text: "AVG over time" #this is a placeholder for average value over time. Delete it.                  
                     TextInput:
                         id: _miles
                         focus: True
@@ -30,16 +30,22 @@
                         font_size: '20dp'
                     Button:
                         text: 'Direct'
-                        # You can do the opertion directly
+                        # You can do the operation directly
                         on_press: _mpg.text = str(float(_miles.text) / float(_gallons.text))
                     Button:
                         text: 'Function'
-                        # Or you can call a method from the root class (instance of calc)
+                        # Or you can call a method from the root class (instance of num_input)
                         on_press: root.mpgs(*args)
             Screen:
                 name: 'screen2'
                 Label: 
-                    text: 'The second screen'
+                    text: 'History'
+
+            Screen:
+                name: 'screen3'
+                Label:
+                    text: 'Graph'
+
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'bottom'
@@ -47,10 +53,13 @@
             orientation: 'horizontal'
             size_hint: 1, .1
             Button:
-                text: 'Go to Screen 1'
+                text: 'Input'
                 on_press: _screen_manager.current = 'screen1'
             Button:
-                text: 'Go to Screen 2'
+                text: 'History'
                 on_press: _screen_manager.current = 'screen2'
+            Button:
+                text: 'Graph'
+                on_press: _screen_manager.current = 'screen3'
  #   Store:
         # Can I add the storage into this part?
