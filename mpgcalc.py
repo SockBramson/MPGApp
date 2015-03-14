@@ -10,13 +10,17 @@ from kivy.uix.button import Button
 class mpgcalc(App):
     def build(self):
         b = BoxLayout()
-        g = GridLayout(cols=2)
-        l1 = Label(text='miles')
+        g = GridLayout(cols=2,
+                        row_default_height = '40dp',
+                        row_force_default = True)
+        l1 = Label(text='Miles')
         t1 = TextInput(id = 'miles',
+                        hint_text = 'Enter mileage',
                         input_type = 'number',
                         input_filter = 'float')
-        l2 = Label(text = 'gallons')
+        l2 = Label(text = 'Gallons')
         t2 = TextInput(id = 'gallons',
+                        hint_text = 'Enter gallons',
                         input_type = 'number',
                         input_filter = 'float')
         b.add_widget(g)

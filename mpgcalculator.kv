@@ -1,15 +1,14 @@
-<MPGCalculator>:    
+<ScatterTextWidget>:
     orientation: 'vertical'
-    GridLayout:
-        cols: 2
-        row_default_height: "40dp"
-        row_force_default: True
-        Label:
-            text: "Miles"
-        TextInput:
-            id: miles_input
-        Button:
-            size_hint_y: None
-            height: "40dp"
-            text: "Enter"
-            on_press: root.MPGCalculatorApp()
+    TextInput:
+        id: my_textinput
+        font_size: 150
+        size_hint_y: None
+        height: 200
+        text: 'default'
+    FloatLayout:
+        Scatter:
+            Label:
+                id: my_label
+                text: my_textinput.text
+                font_size: 150

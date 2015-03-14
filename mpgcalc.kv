@@ -1,10 +1,19 @@
 <mpgcalc>
-    GridLayout:
-        cols: 2
-        Label:  
-            text: 'Miles'
-        TextInput:
-            id: 'Miles'
-            hint_text: 'Miles'
-            input_type: 'number'
-            input_filter: 'float'
+    mpg: _mpg
+    miles: _miles
+    BoxLayout:
+        GridLayout:
+            cols: 2
+            Label:  
+                id: _mpg
+            TextInput:
+                id: _miles
+                hint_text: 'Mileage'
+                input_type: 'number'
+                input_filter: 'float'
+            TextInput:
+                id: _gallons
+                hint_text: 'Gallons'
+                input_type: 'number'
+                input_filter: 'float'
+            
